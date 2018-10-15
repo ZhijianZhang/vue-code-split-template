@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+- '8'
+branchs:
+  only:
+  - master
+before_install:
+- openssl aes-256-cbc -K $encrypted_91c26d80e865_key -iv $encrypted_91c26d80e865_iv
+  -in id_rsa.enc -out ~/.ssh/id_rsa -d
+- chmod 600 ~/.ssh/id_rsa
+after_success:
+- ssh root@119.23.63.192 StrictHostKeyChecking=no 'cd /usr/local/workspace/front-end/vue-code-split-template && git pull'
+addons:
+  ssh_known_hosts: 119.23.63.192
